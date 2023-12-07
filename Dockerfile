@@ -1,20 +1,11 @@
-# Use an official Python runtime as a parent image
-FROM python:3.12.0-alpine3.17
+# To enable ssh & remote debugging on app service change the base image to the one below
+# FROM mcr.microsoft.com/azure-functions/python:4-python3.10-appservice
+FROM mcr.microsoft.com/azure-functions/python:4-python3.10
 
-# Set the working directory in the container to /app
-WORKDIR /app
+ENV AzureWebJobsScriptRoot=/home/site/wwwroot \
+    AzureFunctionsJobHost__Logging__Console__IsEnabled=true
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+COPY requirements.txt /
+RUN pip install -r /requirements.txt
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Make port 80 available to the world outside this container
-EXPOSE 80
-
-# Define environment variable
-ENV NAME World
-
-# Run app.py when the container launches
-CMD ["python", "app.py"]
+COPY . /home/site/wwwroot

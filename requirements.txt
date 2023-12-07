@@ -1,5 +1,5 @@
-flask
 python-dotenv
 azure-ai-formrecognizer
 azure-core
 azure-cosmos
+azure-functions
