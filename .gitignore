@@ -1,9 +1,5 @@
 .env
 /.vscode
 /__pycache__
-.dockerignore
-host.json
-local.settings.json
-```
 .python_packages
 .venv
